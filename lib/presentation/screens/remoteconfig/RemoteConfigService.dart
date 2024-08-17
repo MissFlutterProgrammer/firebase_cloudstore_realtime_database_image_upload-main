@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 // we have first created the instance of the remote config.

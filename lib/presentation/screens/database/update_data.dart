@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class UpdateRecord extends StatefulWidget {
-
-  const UpdateRecord({Key? key, required this.studentKey}) : super(key: key);
+  const UpdateRecord({super.key, required this.studentKey});
 
   final String studentKey;
 
@@ -12,10 +13,9 @@ class UpdateRecord extends StatefulWidget {
 }
 
 class _UpdateRecordState extends State<UpdateRecord> {
-
-  final  userNameController = TextEditingController();
-  final  userAgeController= TextEditingController();
-  final  userSalaryController =TextEditingController();
+  final userNameController = TextEditingController();
+  final userAgeController = TextEditingController();
+  final userSalaryController = TextEditingController();
 
   late DatabaseReference dbRef;
 
@@ -34,23 +34,20 @@ class _UpdateRecordState extends State<UpdateRecord> {
     userNameController.text = student['name'];
     userAgeController.text = student['age'];
     userSalaryController.text = student['salary'];
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Updating record'),
+        title: const Text('Updating record'),
       ),
-      body:  Center(
+      body: Center(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 50),
               const Text(
                 'Updating data in Firebase Realtime Database',
                 style: TextStyle(
@@ -59,9 +56,7 @@ class _UpdateRecordState extends State<UpdateRecord> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               TextField(
                 controller: userNameController,
                 keyboardType: TextInputType.text,
@@ -71,9 +66,7 @@ class _UpdateRecordState extends State<UpdateRecord> {
                   hintText: 'Enter Your Name',
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               TextField(
                 controller: userAgeController,
                 keyboardType: TextInputType.number,
@@ -83,9 +76,7 @@ class _UpdateRecordState extends State<UpdateRecord> {
                   hintText: 'Enter Your Age',
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               TextField(
                 controller: userSalaryController,
                 keyboardType: TextInputType.phone,
@@ -95,29 +86,25 @@ class _UpdateRecordState extends State<UpdateRecord> {
                   hintText: 'Enter Your Salary',
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
               MaterialButton(
                 onPressed: () {
-
                   Map<String, String> students = {
                     'name': userNameController.text,
                     'age': userAgeController.text,
                     'salary': userSalaryController.text
                   };
 
-                  dbRef.child(widget.studentKey).update(students)
-                      .then((value) => {
-                    Navigator.pop(context)
-                  });
-
+                  dbRef
+                      .child(widget.studentKey)
+                      .update(students)
+                      .then((value) => {Navigator.pop(context)});
                 },
-                child: const Text('Update Data'),
                 color: Colors.blue,
                 textColor: Colors.white,
                 minWidth: 300,
                 height: 40,
+                child: const Text('Update Data'),
               ),
             ],
           ),
